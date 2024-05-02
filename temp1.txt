@@ -1,0 +1,23 @@
+hadoop version
+
+javac -version 
+
+start-all.sh
+
+echo HADOOP_CLASSPATH = $(hadoop classpath)
+
+echo $HADOOP_CLASSPATH
+
+hadoop fs -mkdir /31249
+
+hadoop fs -mkdir /31249/input
+
+hadoop fs -put {drag and drop the text file} /31249/input
+
+javac -classpath ${HADOOP_CLASSPATH} -d {drag and drop classes folder} {drag and drop the wordcount.java}
+
+jar -cvf wordcount.jar -C Classes/ .
+
+hadoop jar {drag and drop the jar file} wordcount /31249/input /31249/output
+
+hadoop -dfs cat /31249/output/*

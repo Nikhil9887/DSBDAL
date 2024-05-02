@@ -1,0 +1,59 @@
+start-all.sh
+
+jps
+
+hadoop fs -mkdir /31249
+
+hadoop fs -mkdir /31249/input
+
+hadoop fs -put (drag and drop the input.txt file) /31249/input
+
+hadoop jar (drag and drop the hadoop-map-reduce-example.jar file) wordcount /31249/input /31249/output
+
+hadoop dfs -cat /31249/output/*
+
+
+
+
+
+Extras -> 
+
+hdfs dfs -rm -r /31249      -> to remove the entire folder
+
+by default it runs on localhost:9870
+
+
+
+
+Other way (using only terminal to create jar file if wordcount.java is given)
+
+create a folder lets name it Nikhil
+in Nikhil create a folder named Classes keep it empty
+in Nikhil create a folder input. add input.txt file in input folder
+in Nikhil, put the WordCount.java file (program)
+
+hadoop version
+
+javac -version
+
+start-all.sh
+
+jps
+
+export HADOOP_CLASSPATH=$(hadoop_classpath)
+
+echo $HADOOP_CLASSPATH
+
+hadoop fs -mkdir /31249
+
+hadoop fs -mkdir /31249/input
+
+hadoop fs -put /31249/input
+
+javac -classpath ${HADOOP_CLASSPATH} -d (drag and drop the classes folder) (drag and drop the program file)
+
+jar -cvf WordCount.jar -C Classes/ .
+
+hadoop jar (drag and drop the jar file) WordCount /31249/input /31249/output
+
+hadoop dfs -cat /31249/ouput/*
